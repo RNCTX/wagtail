@@ -30,7 +30,7 @@ class TemplateTestCase(TestCase, WagtailTestUtils):
         if site is None:
             site = self.default_site
         request = HttpRequest()
-        request._wagtail_site = site
+        request.wagtail_site = site
         return request
 
     def render(self, request, string, context=None, site=None):
@@ -174,7 +174,7 @@ class TestSettingsJinja(TemplateTestCase):
             else:
                 site = Site.objects.get(is_default_site=True)
             request = HttpRequest()
-            request._wagtail_site = site
+            request.wagtail_site = site
             context['request'] = request
 
         template = self.engine.from_string(string)
@@ -221,7 +221,7 @@ class TestSettingsJinja(TemplateTestCase):
         # site, dummy request
         site = Site.objects.get(is_default_site=True)
         request = HttpRequest()
-        request._wagtail_site = site
+        request.wagtail_site = site
 
         # run extra query before hand
         Site.find_for_request(request)

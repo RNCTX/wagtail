@@ -214,10 +214,10 @@ class TestRoutablePageTemplateTagForSecondSiteAtSameRoot(TestCase):
 
         self.rf = RequestFactory()
         self.request = self.rf.get(self.routable_page.url)
-        self.request._wagtail_site = Site.find_for_request(self.request)
+        self.request.wagtail_site = Site.find_for_request(self.request)
         self.context = {'request': self.request}
 
-        self.request._wagtail_site = second_site
+        self.request.wagtail_site = second_site
 
     def test_templatetag_reverse_index_route(self):
         url = routablepageurl(self.context, self.routable_page,
@@ -275,7 +275,7 @@ class TestRoutablePageTemplateTagForSecondSiteAtDifferentRoot(TestCase):
         self.request = self.rf.get(self.routable_page.url)
         self.context = {'request': self.request}
 
-        self.request._wagtail_site = second_site
+        self.request.wagtail_site = second_site
 
 
     def test_templatetag_reverse_index_route(self):

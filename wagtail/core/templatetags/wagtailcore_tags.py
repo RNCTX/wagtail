@@ -173,4 +173,4 @@ def wagtail_site(context):
     """
         Returns the Site object for the given request
     """
-    return Site.find_for_request(request=context.request)
+    return Site.find_for_request(request=context['request'])

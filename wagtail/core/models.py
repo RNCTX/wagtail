@@ -110,16 +110,16 @@ class Site(models.Model):
         NB this means that high-numbered ports on an extant hostname may
         still be routed to a different hostname which is set as the default
 
-        The site will be cached via request._wagtail_site
+        The site will be cached via request.wagtail_site
         """
 
         if request is None:
             return None
 
-        if not hasattr(request, '_wagtail_site'):
+        if not hasattr(request, 'wagtail_site'):
             site = Site._find_for_request(request)
-            setattr(request, '_wagtail_site', site)
-        return request._wagtail_site
+            setattr(request, 'wagtail_site', site)
+        return request.wagtail_site
 
     @staticmethod
     def _find_for_request(request):

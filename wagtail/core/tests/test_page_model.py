@@ -291,7 +291,7 @@ class TestRouting(TestCase):
         self.assertEqual(christmas_page.get_site(), events_site)
 
         request = HttpRequest()
-        request._wagtail_site = events_site
+        request.wagtail_site = events_site
 
         self.assertEqual(
             christmas_page.get_url_parts(request=request),
@@ -299,7 +299,7 @@ class TestRouting(TestCase):
         )
 
         request2 = HttpRequest()
-        request2._wagtail_site = second_events_site
+        request2.wagtail_site = second_events_site
         self.assertEqual(
             christmas_page.get_url_parts(request=request2),
             (second_events_site.id, 'http://second-events.example.com', '/christmas/')
@@ -344,7 +344,7 @@ class TestRouting(TestCase):
 
         request = HttpRequest()
         request.user = AnonymousUser()
-        request._wagtail_site = Site.objects.first()
+        request.wagtail_site = Site.objects.first()
 
         response = christmas_page.serve(request)
         self.assertEqual(response.status_code, 200)
