@@ -14,7 +14,7 @@ class Sitemap(DjangoSitemap):
         # (for backwards compatibility from before last_published_at was added)
         return (obj.last_published_at or obj.latest_revision_created_at)
 
-    def getwagtail_site(self):
+    def get_wagtail_site(self):
         site = getattr(self.request, 'site', None)
         if site is None:
             from wagtail.core.models import Site
@@ -25,7 +25,7 @@ class Sitemap(DjangoSitemap):
 
     def items(self):
         return (
-            self.getwagtail_site()
+            self.get_wagtail_site()
             .root_page
             .get_descendants(inclusive=True)
             .live()
